@@ -17,4 +17,11 @@ public class AppUserService implements UserDetailsService {
         return userRepository.findAppUserByEmail(s)
                 .orElseThrow(() -> new UsernameNotFoundException(String.format(NOT_FOUND_EXCEPTION_MSG, s)));
     }
+
+    public void singUpUser(AppUser user) {
+        if (userRepository.existsByEmail(user.getEmail())) {
+            throw new IllegalStateException(user.getEmail() + " is already registered");
+        }
+        userRepository.save(user);
+    }
 }

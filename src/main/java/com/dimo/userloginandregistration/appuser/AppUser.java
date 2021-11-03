@@ -17,31 +17,47 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor
 @Entity
+@Table(name = "app_user")
 public class AppUser implements UserDetails {
     @SequenceGenerator(
-            name = "id_sequence",
-            sequenceName = "id_sequence",
+            name = "user_sequence",
+            sequenceName = "user_sequence",
             allocationSize = 1
     )
-    @Id
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "id_sequence"
+            generator = "user_sequence"
     )
-    private long id;
-    private String userName;
-    private String password;
+    @Id private long app_user_id;
+    private String firstName;
+    private String lastName;
     private String email;
-    @Enumerated
-    private UserRole role;
-    private boolean locked;
-    private boolean enabled;
+    private String password;
+    @Enumerated private UserRole role;
+    private boolean locked = false;
+    private boolean enabled = true;
 
+
+    public AppUser(String firstName, String lastName, String email, String password, UserRole role) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        GrantedAuthority authority = new SimpleGrantedAuthority(userName);
+        GrantedAuthority authority = new SimpleGrantedAuthority(email);
         return Collections.singletonList(authority);
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
     }
 
     @Override
@@ -51,7 +67,7 @@ public class AppUser implements UserDetails {
 
     @Override
     public String getUsername() {
-        return userName;
+        return email;
     }
 
     @Override
@@ -61,17 +77,17 @@ public class AppUser implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
         return !locked;
     }
 
     @Override
-    public boolean isEnabled() {
+    public boolean isCredentialsNonExpired() {
         return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return enabled;
     }
 
     @Override
@@ -80,7 +96,7 @@ public class AppUser implements UserDetails {
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         AppUser appUser = (AppUser) o;
 
-        return Objects.equals(id, appUser.id);
+        return Objects.equals(app_user_id, appUser.app_user_id);
     }
 
     @Override
