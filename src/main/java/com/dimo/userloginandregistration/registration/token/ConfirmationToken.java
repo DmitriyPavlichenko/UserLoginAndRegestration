@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @Setter
 @Getter
 @Entity
+@Table(name = "confirmation_token")
 public class ConfirmationToken {
     @SequenceGenerator(
             name = "token_sequence",
@@ -31,10 +32,7 @@ public class ConfirmationToken {
     private LocalDateTime expiresAt;
     private LocalDateTime confirmedAt;
     @ManyToOne
-    @JoinColumn(
-            nullable = false,
-            name = "app_user_id"
-    )
+    @JoinColumn(nullable = false, referencedColumnName = "id")
     private AppUser user;
 
     public ConfirmationToken(String token, LocalDateTime createdAt, LocalDateTime expiresAt, AppUser user) {

@@ -18,4 +18,9 @@ public class RegistrationController {
     public String submitToken(@RequestParam("token") String token) {
         return registrationService.confirmToken(token);
     }
+
+    @GetMapping(path = "resent_token")
+    public String resentConfirmationToken(@RequestParam("email") String email) {
+        return registrationService.resentConfirmationToken(email);
+    }
 }

@@ -28,7 +28,7 @@ public class AppUser implements UserDetails {
             strategy = GenerationType.SEQUENCE,
             generator = "user_sequence"
     )
-    @Id private long app_user_id;
+    @Id private long id;
     private String firstName;
     private String lastName;
     private String email;
@@ -96,7 +96,7 @@ public class AppUser implements UserDetails {
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         AppUser appUser = (AppUser) o;
 
-        return Objects.equals(app_user_id, appUser.app_user_id);
+        return Objects.equals(id, appUser.id);
     }
 
     @Override
