@@ -43,7 +43,7 @@ public class RegistrationService {
     }
 
     public String resentConfirmationToken(String email) {
-        ConfirmationToken token = tokenService.getTokenWithExspiresDate(email);
+        ConfirmationToken token = tokenService.getTokenWithExpiresDate(email);
         return sendMail(token.getUser().getEmail(), token.getUser().getFirstName(), token.getToken());
     }
 

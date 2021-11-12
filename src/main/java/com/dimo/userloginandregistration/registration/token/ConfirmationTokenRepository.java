@@ -16,14 +16,14 @@ public interface ConfirmationTokenRepository extends JpaRepository<ConfirmationT
     Optional<ConfirmationToken> getConfirmationTokenByUser_Email(String email);
 
     @Transactional
-    @Modifying
+    @Modifying(clearAutomatically = true)
     @Query("UPDATE ConfirmationToken c " +
             "SET c.confirmedAt = ?2 " +
             "WHERE c.token = ?1")
     int updateConfirmedAt(String token, LocalDateTime confirmedAt);
 
     @Transactional
-    @Modifying
+    @Modifying(clearAutomatically = true)
     @Query("UPDATE ConfirmationToken t " +
             "SET t.expiresAt = ?2 " +
             "WHERE t.token = ?1")

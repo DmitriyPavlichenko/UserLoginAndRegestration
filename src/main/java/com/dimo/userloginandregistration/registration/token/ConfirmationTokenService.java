@@ -21,14 +21,14 @@ public class ConfirmationTokenService {
             ConfirmationToken confirmationToken = tokenRepository.getConfirmationTokenByToken(token).get();
             if (confirmationToken.getCreatedAt().isBefore(confirmationToken.getExpiresAt())) {
                 tokenRepository.updateConfirmedAt(confirmationToken.getToken(), LocalDateTime.now());
-                userRepository.updateEnabled(confirmationToken.getUser().getEmail(), true);
+                userRepository.updateEnabledByEmail(confirmationToken.getUser().getEmail(), true);
                 return "Email successfully confirmed";
             }
         }
         return "Email wasn't confirmed";
     }
 
-    public ConfirmationToken getTokenWithExspiresDate(String email) {
+    public ConfirmationToken getTokenWithExpiresDate(String email) {
         ConfirmationToken confirmationToken =
                 tokenRepository.getConfirmationTokenByUser_Email(email)
                         .orElseThrow(() -> new IllegalStateException("Invalid email"));
