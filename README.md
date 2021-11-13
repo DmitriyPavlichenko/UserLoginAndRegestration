@@ -7,3 +7,4 @@ Stack of tecknologies:
 -Spring JPA
 -PostgreSQL
 -Java mail sender
+-JUnit, Mockito
