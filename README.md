@@ -8,3 +8,4 @@ Stack of tecknologies:
 -PostgreSQL
 -Java mail sender
 -JUnit, Mockito
+-Lombok
