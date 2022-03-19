@@ -1,11 +1,4 @@
-# UserLoginAndRegestration
-User regestration and logging in
-
-Stack of tecknologies:
--Spring Web
--Spring Security
--Spring JPA
--PostgreSQL
--Java mail sender
--JUnit, Mockito
--Lombok
+# LoARe (UserLoginAndRegestration)
+LoARe – a RESTful-service, provides user registration (with email confirmation) and logging in functionality
+#### Tech stack:
+Java 8, Lombok, Spring (Boot, MVC, Data, Mail, Security), JUnit, Mockito, AssertJ, PostgreSQL, H2 (for testing)
