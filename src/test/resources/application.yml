@@ -20,11 +20,11 @@ spring:
     properties:
       mail:
         smtp:
-           ssl:
+          ssl:
             trust: "*"
-           auth: true
+          auth: true
           starttls:
-             enable: true
+            enable: true
           connectiontimeout: 5000
           timeout: 3000
           writetimeout: 5000
